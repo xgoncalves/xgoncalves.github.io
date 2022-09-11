@@ -5,11 +5,18 @@ html, body {
 body {
     background: #e2e1e0;
     padding: 0;
+    margin: 0;
     font-family: 'Montserrat Alternates', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
+}
+
+#skip-to-content {
+    clip: rect(0 0 0 0);
+    position: absolute;
 }
   
 h1 {
-    font-weight: normal;
+    font-weight: normal;    
+    margin-top: 0;
 }
 
 h1 a {
@@ -21,17 +28,66 @@ p {
     line-height: 1.8rem;
 }
 
+img {
+    max-width: 100%;
+}
+
+#main-content {
+    padding: 1rem;
+}
+
 .card {
     background: #fff;
-    border-radius: 2px;
+    border-radius: 4px;
     margin: 4rem auto;
     position: relative;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     max-width: 640px;
-    padding: 1rem 1.5rem;
+    padding: 2rem 2rem;
     overflow: hidden;
 }
 
-.text-secondary, .text-secondary a {
+.card-title {
+    display: inline-block;
+    width: 84%;
+    vertical-align: top;
+}
+
+.card-image {
+    display: inline-block;
+    width: 13%;
+    text-align: right;
+    vertical-align: top;
+}
+
+.text-secondary, .text-secondary a, .coming-soon {
     color: rgba(126, 126, 126, 1);
+    line-height: 1.1rem;
+}
+
+.text-secondary a:hover {
+    color: rgba(50, 50, 50, 1);
+}
+
+.coming-soon {
+    text-align: center;
+    font-style: italic;
+    font-size: 0.8rem;
+}
+
+@media screen and (max-width: 600px) {
+    .card-image {
+        display: none;
+    }
+
+    .card-title {
+        width: 100%;
+    }
+    
+    h1 {
+        font-size: 1.4rem;
+    }
+    .card {
+        max-width: 100%;
+    }
 }
