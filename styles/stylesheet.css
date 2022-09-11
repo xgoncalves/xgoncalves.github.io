@@ -1,0 +1,37 @@
+html, body {
+    height:100%;
+} 
+
+body {
+    background: #e2e1e0;
+    padding: 0;
+    font-family: 'Montserrat Alternates', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
+}
+  
+h1 {
+    font-weight: normal;
+}
+
+h1 a {
+    color: black;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.8rem;
+}
+
+.card {
+    background: #fff;
+    border-radius: 2px;
+    margin: 4rem auto;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    max-width: 640px;
+    padding: 1rem 1.5rem;
+    overflow: hidden;
+}
+
+.text-secondary, .text-secondary a {
+    color: rgba(126, 126, 126, 1);
+}
