@@ -59,12 +59,12 @@ img {
 }
 
 .text-secondary, .text-secondary a, .coming-soon {
-    color: rgba(126, 126, 126, 1);
+    color: #534e3a;
     line-height: 1.1rem;
 }
 
 .text-secondary a:hover {
-    color: rgba(50, 50, 50, 1);
+    color: black;
 }
 
 .coming-soon {
