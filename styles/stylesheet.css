@@ -3,7 +3,7 @@ html, body {
 } 
 
 body {
-    background: #e2e1e0;
+    background: #F4BE6A;
     padding: 0;
     margin: 0;
     font-family: 'Montserrat Alternates', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
@@ -37,11 +37,9 @@ img {
 }
 
 .card {
-    background: #fff;
     border-radius: 4px;
     margin: 4rem auto;
     position: relative;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     max-width: 640px;
     padding: 2rem 2rem;
     overflow: hidden;
