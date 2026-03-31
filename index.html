@@ -1,32 +1,740 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset='utf-8'>
-        <meta http-equiv="X-UA-Compatible" content="chrome=1">
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta name="description" content="xgoncalves.github.io : ">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Xavier Gonçalves · Product Designer</title>
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a08;
+      --ink: #f0ece0;
+      --accent: #d4f53c;
+      --red: #e84b2a;
+      --muted: #7d7d72;
+      --mid: #8a8a78;
+    }
 
-        <link rel="stylesheet" type="text/css" media="screen" href="styles/stylesheet.css">
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        <title>Xavier G.</title>
-        <link rel="icon" type="image/x-icon" href="/resources/favicon.ico">
-    </head>
+    html { scroll-behavior: smooth; }
 
-    <body>
-        <a href="#main-content" id="skip-to-content">Skip to content</a>
-        <div id="main-content">
-            <div class="card">
-                <h1><span>👋</span> I'm Xavier, a product designer at <a href="https://www.linkare.com" target="_blank" title="Linkare website">Linkare</a>.</h1>
-                <p>I am deeply passionate about guiding user interface projects from inception to production.</p>
-                <p>Throughout every stage, from user research and design to coding, testing, analysis, and communication, I am actively engaged.</p>
-                <p>My goal is to ensure that the final product delivers an exceptional user experience.</p>
-                <div class="links">
-                    <a href="resources/XavierGoncalves-CV.pdf" target="_blank" title="curriculum"><span>🧑‍🚀</span> Download my CV</a>
-                    <a href="https://codepen.io/collection/ArprPM" target="_blank" title="experiments"><span>🧪</span> View my experiments</a>
-                    <a href="https://www.linkedin.com/in/xavier-goncalves/" target="_blank" title="linkedin"><span>🚀</span> Connect on Linkedin</a>
-                </div>
-            </div>
-            <p class="coming-soon">—<br/>more content coming soon, probably</p>
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* CUSTOM CURSOR */
+    #cursor {
+      position: fixed;
+      width: 12px; height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+      mix-blend-mode: difference;
+    }
+    #cursor.hovering {
+      width: 40px; height: 40px;
+      background: var(--accent);
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.5;
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 4rem 3rem 4rem 4rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s forwards 0.3s;
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4.5rem, 10vw, 10rem);
+      line-height: 0.85;
+      color: var(--ink);
+      opacity: 0;
+      animation: fadeUp 0.9s forwards 0.5s;
+    }
+
+    .hero-name span {
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero-desc {
+      margin-top: 2.5rem;
+      font-size: 0.8rem;
+      line-height: 1.9;
+      color: var(--mid);
+      max-width: 340px;
+      opacity: 0;
+      animation: fadeUp 0.9s forwards 0.8s;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s forwards 1s;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.8rem 1.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--ink);
+      transform: translateY(-2px);
+    }
+
+    .scroll-hint {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-visual {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Animated geometric design element */
+    .geo-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid;
+      animation: spin linear infinite;
+    }
+    .geo-ring:nth-child(1) {
+      width: 320px; height: 320px;
+      border-color: rgba(212,245,60,0.15);
+      animation-duration: 20s;
+    }
+    .geo-ring:nth-child(2) {
+      width: 240px; height: 240px;
+      border-color: rgba(212,245,60,0.1);
+      border-style: dashed;
+      animation-duration: 14s;
+      animation-direction: reverse;
+    }
+    .geo-ring:nth-child(3) {
+      width: 160px; height: 160px;
+      border-color: rgba(232,75,42,0.3);
+      animation-duration: 9s;
+    }
+
+    .geo-dot {
+      position: absolute;
+      border-radius: 50%;
+    }
+    .geo-dot:nth-child(4) {
+      width: 80px; height: 80px;
+      background: var(--accent);
+      opacity: 0.9;
+      animation: pulse 3s ease-in-out infinite;
+    }
+    .geo-dot:nth-child(5) {
+      width: 8px; height: 8px;
+      background: var(--red);
+      top: 30%; right: 25%;
+      animation: float 4s ease-in-out infinite;
+    }
+    .geo-dot:nth-child(6) {
+      width: 5px; height: 5px;
+      background: var(--ink);
+      bottom: 30%; left: 25%;
+      animation: float 5s ease-in-out infinite 1s;
+    }
+
+    .hero-country {
+      position: absolute;
+      bottom: 3rem;
+      right: 3rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+      opacity: 0;
+      animation: fadeIn 1s forwards 1.5s;
+    }
+
+    /* MARQUEE */
+    .marquee-wrap {
+      border-top: 1px solid var(--muted);
+      border-bottom: 1px solid var(--muted);
+      overflow: hidden;
+      padding: 1rem 0;
+      background: transparent;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 4rem;
+      white-space: nowrap;
+      animation: marquee 18s linear infinite;
+    }
+
+    .marquee-item {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .marquee-item b {
+      color: var(--accent);
+    }
+
+    /* ABOUT SECTION */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 8rem 4rem;
+      gap: 4rem;
+    }
+
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .about-left h2 {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    .about-left h2 strong {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .about-right p {
+      font-size: 0.82rem;
+      line-height: 2;
+      color: var(--mid);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .stat-item {
+      border-left: 2px solid var(--accent);
+      padding-left: 1rem;
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* SERVICES */
+    #services {
+      padding: 6rem 4rem;
+      border-top: 1px solid var(--muted);
+    }
+
+    #services .section-label { margin-bottom: 4rem; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .service-card {
+      padding: 3rem 2.5rem;
+      border: 1px solid var(--muted);
+      margin: -1px 0 0 -1px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+      z-index: 0;
+    }
+
+    .service-card:hover::before { transform: scaleY(1); }
+    .service-card:hover .service-num,
+    .service-card:hover .service-title,
+    .service-card:hover .service-text { color: var(--bg); }
+
+    .service-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: var(--muted);
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s;
+    }
+
+    .service-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--ink);
+      margin: 1.5rem 0 1rem;
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s;
+    }
+
+    .service-text {
+      font-size: 0.75rem;
+      line-height: 1.8;
+      color: var(--mid);
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s;
+    }
+
+    /* FOOTER */
+    #footer {
+      padding: 6rem 4rem 3rem;
+      border-top: 1px solid var(--muted);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+    }
+
+    .footer-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 6rem);
+      line-height: 0.9;
+      color: var(--ink);
+    }
+
+    .footer-headline span { color: var(--accent); }
+
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: flex-end;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .social-link {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .social-link::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    .social-link:hover { color: var(--accent); }
+    .social-link:hover::after { width: 100%; }
+
+    .footer-copy {
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+    }
+
+    .footer-bottom {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--muted);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* FOCUS VISIBLE */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    /* SKIP LINK */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.6rem 1.2rem;
+      font-size: 0.8rem;
+      font-weight: 400;
+      text-decoration: none;
+      z-index: 99999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.1); opacity: 0.6; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* SCROLL ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* REDUCED MOTION */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .marquee-track { animation: none; }
+      body { cursor: auto; }
+      #cursor { display: none; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      #about { grid-template-columns: 1fr; padding: 4rem 2rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      #services { padding: 4rem 2rem; }
+      #footer { grid-template-columns: 1fr; padding: 4rem 2rem 2rem; }
+      .footer-right { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#hero" class="skip-link">Skip to content</a>
+
+  <div id="cursor" aria-hidden="true"></div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <p class="tag">✦ Available for projects</p>
+      <h1 class="hero-name">
+        Xavier
+        <span>Gonçalves</span>
+      </h1>
+      <p class="hero-desc">
+        Product designer obsessed with the space between pixels and people.
+        Building experiences that feel inevitable, the kind where you forget
+        there was ever a designer involved.
+      </p>
+      <div class="hero-cta">
+        <a href="#about" class="btn-primary">About me →</a>
+      </div>
+    </div>
+    <div class="hero-right" aria-hidden="true">
+      <div class="hero-visual">
+        <div class="geo-ring"></div>
+        <div class="geo-ring"></div>
+        <div class="geo-ring"></div>
+        <div class="geo-dot"></div>
+        <div class="geo-dot"></div>
+        <div class="geo-dot"></div>
+      </div>
+      <p class="hero-country">Portugal · Est. 2013</p>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">Product Design</span>
+      <span class="marquee-item">✦</span>
+      <span class="marquee-item">UX Research</span>
+      <span class="marquee-item">✦</span>
+      <span class="marquee-item">Portugal</span>
+      <span class="marquee-item">✦</span>
+      <span class="marquee-item">Design Systems</span>
+      <span class="marquee-item">✦</span>
+      <span class="marquee-item">Interaction Design</span>
+      <span class="marquee-item">✦</span>
+      <span class="marquee-item">Xavier</span>
+      <span class="marquee-item">✦</span>
+      <span class="marquee-item">Product Design</span>
+      <span class="marquee-item">✦</span>
+      <span class="marquee-item">UX Research</span>
+      <span class="marquee-item">✦</span>
+      <span class="marquee-item">Portugal</span>
+      <span class="marquee-item">✦</span>
+      <span class="marquee-item">Design Systems</span>
+      <span class="marquee-item">✦</span>
+      <span class="marquee-item">Interaction Design</span>
+      <span class="marquee-item">✦</span>
+      <span class="marquee-item">Gonçalves</span>
+      <span class="marquee-item">✦</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-left reveal">
+      <p class="section-label">// about me</p>
+      <h2>
+        Design that <strong>solves</strong>,
+        not that <em>impresses.</em>
+      </h2>
+    </div>
+    <div class="about-right reveal">
+      <p>
+        I'm Xavier Gonçalves, a product designer with a habit of finding
+        the real problem behind the stated one. I work at the intersection
+        of business, technology and people, turning complexity into clarity.
+      </p>
+      <p>
+        From discovery to launch. From concept to component. I prefer
+        hard questions over easy answers.
+      </p>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Problems solved</div>
         </div>
-    </body>
+        <div class="stat-item">
+          <div class="stat-num">+20</div>
+          <div class="stat-label">Projects delivered</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">0px</div>
+          <div class="stat-label">Margin for mediocrity</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">∅</div>
+          <div class="stat-label">Dark patterns used</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <p class="section-label">// what I do</p>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <h3 class="service-title">Product Design</h3>
+        <p class="service-text">
+          From strategy to high-fidelity prototype.
+          I work closely with PMs and engineers to make sure
+          the design survives contact with reality.
+        </p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">02</div>
+        <h3 class="service-title">Design Systems</h3>
+        <p class="service-text">
+          Components that scale. Tokens that make sense.
+          Documentation people actually read. Consistency
+          as the team's superpower.
+        </p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">03</div>
+        <h3 class="service-title">UX Research</h3>
+        <p class="service-text">
+          Interviews, usability testing, heuristic analysis.
+          Replacing opinions with evidence, and convincing
+          stakeholders to do the same.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-left reveal">
+      <p class="section-label">// let's work together</p>
+      <h2 class="footer-headline">
+        Got a <span>project?</span><br>
+        Let's talk.
+      </h2>
+    </div>
+    <div class="footer-right reveal">
+      <div class="social-row">
+        <a href="https://www.linkedin.com/in/xavier-goncalves" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a>
+        <a href="https://codepen.io/collection/ArprPM" target="_blank" rel="noopener noreferrer" class="social-link">Codepen</a>
+        <a href="https://www.behance.net/xaviergoncalves" target="_blank" rel="noopener noreferrer" class="social-link">Behance</a>
+      </div>
+      <a href="mailto:xsgoncalves@gmail.com" class="btn-primary">xsgoncalves@gmail.com →</a>
+      <a href="https://xgoncalves.github.io/resources/XavierGoncalves-CV.pdf" target="_blank" rel="noopener noreferrer" class="social-link">Curriculum</a>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 · Made with passion and AI.</span>
+      <span class="footer-copy">Xavier Gonçalves · Product Designer</span>
+    </div>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    const hoverTargets = document.querySelectorAll('a, button, .service-card');
+    hoverTargets.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 120);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Parallax on hero geo rings
+    document.addEventListener('mousemove', e => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      document.querySelectorAll('.geo-ring').forEach((ring, i) => {
+        const factor = (i + 1) * 0.4;
+        ring.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+      });
+    });
+  </script>
+</body>
 </html>
