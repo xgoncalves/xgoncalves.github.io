@@ -11,7 +11,6 @@
       --bg: #0a0a08;
       --ink: #f0ece0;
       --accent: #d4f53c;
-      --red: #e84b2a;
       --muted: #7d7d72;
       --mid: #8a8a78;
     }
@@ -26,24 +25,9 @@
       font-family: 'DM Mono', monospace;
       font-weight: 300;
       overflow-x: hidden;
-      cursor: none;
-    }
-
-    /* CUSTOM CURSOR */
-    #cursor {
-      position: fixed;
-      width: 12px; height: 12px;
-      background: var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
-      mix-blend-mode: difference;
-    }
-    #cursor.hovering {
-      width: 40px; height: 40px;
-      background: var(--accent);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     /* NOISE OVERLAY */
@@ -60,19 +44,28 @@
     /* HERO */
     #hero {
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-left {
+      width: 100%;
+      max-width: 42rem;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 4rem 3rem 4rem 4rem;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 1.5rem;
+      gap: 3rem;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       position: relative;
       z-index: 2;
+      width: 100%;
     }
 
     .tag {
@@ -87,8 +80,11 @@
 
     .hero-name {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4.5rem, 10vw, 10rem);
-      line-height: 0.85;
+      font-size: clamp(2rem, 7vw, 3.25rem);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
       color: var(--ink);
       opacity: 0;
       animation: fadeUp 0.9s forwards 0.5s;
@@ -96,7 +92,7 @@
 
     .hero-name span {
       color: var(--accent);
-      display: block;
+      font-weight: 400;
     }
 
     .hero-desc {
@@ -104,7 +100,9 @@
       font-size: 0.8rem;
       line-height: 1.9;
       color: var(--mid);
-      max-width: 340px;
+      max-width: 28rem;
+      margin-left: auto;
+      margin-right: auto;
       opacity: 0;
       animation: fadeUp 0.9s forwards 0.8s;
     }
@@ -113,6 +111,7 @@
       margin-top: 3rem;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 2rem;
       opacity: 0;
       animation: fadeUp 0.9s forwards 1s;
@@ -138,124 +137,22 @@
       transform: translateY(-2px);
     }
 
-    .scroll-hint {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-
-    .hero-right {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-visual {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Animated geometric design element */
-    .geo-ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid;
-      animation: spin linear infinite;
-    }
-    .geo-ring:nth-child(1) {
-      width: 320px; height: 320px;
-      border-color: rgba(212,245,60,0.15);
-      animation-duration: 20s;
-    }
-    .geo-ring:nth-child(2) {
-      width: 240px; height: 240px;
-      border-color: rgba(212,245,60,0.1);
-      border-style: dashed;
-      animation-duration: 14s;
-      animation-direction: reverse;
-    }
-    .geo-ring:nth-child(3) {
-      width: 160px; height: 160px;
-      border-color: rgba(232,75,42,0.3);
-      animation-duration: 9s;
-    }
-
-    .geo-dot {
-      position: absolute;
-      border-radius: 50%;
-    }
-    .geo-dot:nth-child(4) {
-      width: 80px; height: 80px;
-      background: var(--accent);
-      opacity: 0.9;
-      animation: pulse 3s ease-in-out infinite;
-    }
-    .geo-dot:nth-child(5) {
-      width: 8px; height: 8px;
-      background: var(--red);
-      top: 30%; right: 25%;
-      animation: float 4s ease-in-out infinite;
-    }
-    .geo-dot:nth-child(6) {
-      width: 5px; height: 5px;
-      background: var(--ink);
-      bottom: 30%; left: 25%;
-      animation: float 5s ease-in-out infinite 1s;
-    }
-
-    .hero-country {
-      position: absolute;
-      bottom: 3rem;
-      right: 3rem;
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--muted);
-      writing-mode: vertical-rl;
-      opacity: 0;
-      animation: fadeIn 1s forwards 1.5s;
-    }
-
-    /* MARQUEE */
-    .marquee-wrap {
-      border-top: 1px solid var(--muted);
-      border-bottom: 1px solid var(--muted);
-      overflow: hidden;
-      padding: 1rem 0;
-      background: transparent;
-    }
-
-    .marquee-track {
-      display: flex;
-      gap: 4rem;
-      white-space: nowrap;
-      animation: marquee 18s linear infinite;
-    }
-
-    .marquee-item {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      letter-spacing: 0.05em;
-      color: var(--muted);
-      flex-shrink: 0;
-    }
-
-    .marquee-item b {
-      color: var(--accent);
-    }
-
     /* ABOUT SECTION */
     #about {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding: 8rem 4rem;
-      gap: 4rem;
+      width: 100%;
+      max-width: 40rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 1.5rem;
+      gap: 2.5rem;
+      border-top: 1px solid var(--muted);
     }
 
     .section-label {
+      display: block;
       font-size: 0.6rem;
       letter-spacing: 0.4em;
       text-transform: uppercase;
@@ -279,64 +176,87 @@
     .about-right {
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
       gap: 2rem;
+      width: 100%;
     }
 
     .about-right p {
       font-size: 0.82rem;
       line-height: 2;
       color: var(--mid);
+      text-align: left;
     }
 
     .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 1rem;
       margin-top: 1rem;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .stats-grid::-webkit-scrollbar {
+      display: none;
     }
 
     .stat-item {
-      border-left: 2px solid var(--accent);
-      padding-left: 1rem;
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 0.85rem 0.35rem 0;
+      text-align: center;
     }
 
     .stat-num {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.8rem;
-      color: var(--ink);
+      font-size: clamp(1.75rem, 4.5vw, 2.35rem);
+      font-weight: 400;
       line-height: 1;
+      color: var(--accent);
     }
 
     .stat-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-top: 0.3rem;
+      margin-top: 0.35rem;
+      line-height: 1.35;
     }
 
     /* SERVICES */
     #services {
-      padding: 6rem 4rem;
+      width: 100%;
+      max-width: 36rem;
+      margin: 0 auto;
+      padding: 6rem 1.5rem;
       border-top: 1px solid var(--muted);
+      text-align: center;
     }
 
     #services .section-label { margin-bottom: 4rem; }
 
     .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
       gap: 0;
     }
 
     .service-card {
       padding: 3rem 2.5rem;
       border: 1px solid var(--muted);
-      margin: -1px 0 0 -1px;
+      margin-top: -1px;
       position: relative;
       overflow: hidden;
       transition: border-color 0.3s;
+      text-align: left;
     }
 
     .service-card::before {
@@ -386,19 +306,24 @@
 
     /* FOOTER */
     #footer {
-      padding: 6rem 4rem 3rem;
+      width: 100%;
+      max-width: 40rem;
+      margin: 0 auto;
+      padding: 6rem 1.5rem 3rem;
       border-top: 1px solid var(--muted);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: end;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 3rem;
     }
 
     .footer-headline {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3rem, 6vw, 6rem);
-      line-height: 0.9;
+      font-size: clamp(2.25rem, 5vw, 4rem);
+      line-height: 1;
       color: var(--ink);
+      font-weight: normal;
     }
 
     .footer-headline span { color: var(--accent); }
@@ -407,11 +332,13 @@
       display: flex;
       flex-direction: column;
       gap: 2rem;
-      align-items: flex-end;
+      align-items: center;
     }
 
     .social-row {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 2rem;
     }
 
@@ -444,12 +371,13 @@
     }
 
     .footer-bottom {
-      grid-column: 1 / -1;
+      width: 100%;
       border-top: 1px solid var(--muted);
       padding-top: 2rem;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
+      gap: 1rem;
     }
 
     /* FOCUS VISIBLE */
@@ -479,26 +407,6 @@
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.9; }
-      50% { transform: scale(1.1); opacity: 0.6; }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
 
     /* SCROLL ANIMATIONS */
     .reveal {
@@ -518,203 +426,132 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
-      .marquee-track { animation: none; }
-      body { cursor: auto; }
-      #cursor { display: none; }
       .reveal { opacity: 1; transform: none; }
     }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      #hero { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
-      #about { grid-template-columns: 1fr; padding: 4rem 2rem; }
-      .services-grid { grid-template-columns: 1fr; }
-      #services { padding: 4rem 2rem; }
-      #footer { grid-template-columns: 1fr; padding: 4rem 2rem 2rem; }
-      .footer-right { align-items: flex-start; }
+      #hero { padding: 3rem 1.25rem; min-height: auto; }
+      #about { padding: 4rem 1.25rem; }
+      #services { padding: 4rem 1.25rem; }
+      #footer { padding: 4rem 1.25rem 2rem; }
     }
   </style>
 </head>
 <body>
 
-  <a href="#hero" class="skip-link">Skip to content</a>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
-  <div id="cursor" aria-hidden="true"></div>
-
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-left">
-      <p class="tag">— Available for projects</p>
-      <h1 class="hero-name">
-        Xavier
-        <span>Gonçalves</span>
-      </h1>
-      <p class="hero-desc">
-        Product designer obsessed with the space between pixels and people.
-        Building experiences that feel inevitable, the kind where you forget
-        there was ever a designer involved.
-      </p>
-      <div class="hero-cta">
-        <a href="#about" class="btn-primary">About me →</a>
-      </div>
-    </div>
-    <div class="hero-right" aria-hidden="true">
-      <div class="hero-visual">
-        <div class="geo-ring"></div>
-        <div class="geo-ring"></div>
-        <div class="geo-ring"></div>
-        <div class="geo-dot"></div>
-        <div class="geo-dot"></div>
-        <div class="geo-dot"></div>
-      </div>
-      <p class="hero-country">Portugal · Est. 2013</p>
-    </div>
-  </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee-wrap" aria-hidden="true">
-    <div class="marquee-track">
-      <span class="marquee-item">Product Design</span>
-      <span class="marquee-item">✦</span>
-      <span class="marquee-item">UX Research</span>
-      <span class="marquee-item">✦</span>
-      <span class="marquee-item">Portugal</span>
-      <span class="marquee-item">✦</span>
-      <span class="marquee-item">Design Systems</span>
-      <span class="marquee-item">✦</span>
-      <span class="marquee-item">Interaction Design</span>
-      <span class="marquee-item">✦</span>
-      <span class="marquee-item">Xavier</span>
-      <span class="marquee-item">✦</span>
-      <span class="marquee-item">Product Design</span>
-      <span class="marquee-item">✦</span>
-      <span class="marquee-item">UX Research</span>
-      <span class="marquee-item">✦</span>
-      <span class="marquee-item">Portugal</span>
-      <span class="marquee-item">✦</span>
-      <span class="marquee-item">Design Systems</span>
-      <span class="marquee-item">✦</span>
-      <span class="marquee-item">Interaction Design</span>
-      <span class="marquee-item">✦</span>
-      <span class="marquee-item">Gonçalves</span>
-      <span class="marquee-item">✦</span>
-    </div>
-  </div>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-left reveal">
-      <p class="section-label">// about me</p>
-      <h2>
-        Design that <strong>solves</strong>,
-        not that <em>impresses.</em>
-      </h2>
-    </div>
-    <div class="about-right reveal">
-      <p>
-        I'm Xavier Gonçalves, a product designer with a habit of finding
-        the real problem behind the stated one. I work at the intersection
-        of business, technology and people, turning complexity into clarity.
-      </p>
-      <p>
-        From discovery to launch. From concept to component. I prefer
-        hard questions over easy answers.
-      </p>
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-num">∞</div>
-          <div class="stat-label">Problems solved</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">+20</div>
-          <div class="stat-label">Projects delivered</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">0px</div>
-          <div class="stat-label">Margin for mediocrity</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">∅</div>
-          <div class="stat-label">Dark patterns used</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services">
-    <p class="section-label">// what I do</p>
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <div class="service-num">01</div>
-        <h3 class="service-title">Product Design</h3>
-        <p class="service-text">
-          From strategy to high-fidelity prototype.
-          I work closely with PMs and engineers to make sure
-          the design survives contact with reality.
+  <main id="main-content">
+    <header id="hero">
+      <div class="hero-content">
+        <p class="tag">— Available for projects</p>
+        <h1 class="hero-name">Xavier <span>Gonçalves</span></h1>
+        <p class="hero-desc">
+          Product designer obsessed with the space between pixels and people.
+          Building experiences that feel inevitable, the kind where you forget
+          there was ever a designer involved.
         </p>
+        <div class="hero-cta">
+          <a href="#about" class="btn-primary">About me →</a>
+        </div>
       </div>
-      <div class="service-card reveal">
-        <div class="service-num">02</div>
-        <h3 class="service-title">Design Systems</h3>
-        <p class="service-text">
-          Components that scale. Tokens that make sense.
-          Documentation people actually read. Consistency
-          as the team's superpower.
-        </p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-num">03</div>
-        <h3 class="service-title">UX Research</h3>
-        <p class="service-text">
-          Interviews, usability testing, heuristic analysis.
-          Replacing opinions with evidence, and convincing
-          stakeholders to do the same.
-        </p>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- FOOTER -->
+    <section id="about">
+      <div class="about-left reveal">
+        <p class="section-label">// about me</p>
+        <h2>
+          Less design. <br/> More <strong>solution</strong>.
+        </h2>
+      </div>
+      <div class="about-right reveal">
+        <p>
+          I'm Xavier Gonçalves, a product designer with a habit of finding
+          the real problem behind the stated one. I work at the intersection
+          of business, technology and people, turning complexity into clarity.
+        <br/>
+          From discovery to launch. From concept to component. I prefer
+          hard questions over easy answers.
+        </p>
+        <dl class="stats-grid">
+          <div class="stat-item">
+            <dt class="stat-num">∞</dt>
+            <dd class="stat-label">Problems solved</dd>
+          </div>
+          <div class="stat-item">
+            <dt class="stat-num">+20</dt>
+            <dd class="stat-label">Projects delivered</dd>
+          </div>
+          <div class="stat-item">
+            <dt class="stat-num">0px</dt>
+            <dd class="stat-label">Margin for mediocrity</dd>
+          </div>
+          <div class="stat-item">
+            <dt class="stat-num">∅</dt>
+            <dd class="stat-label">Dark patterns used</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="services">
+      <h2 class="section-label">// what I do</h2>
+      <div class="services-grid">
+        <article class="service-card reveal">
+          <div class="service-num">01</div>
+          <h3 class="service-title">Product Design</h3>
+          <p class="service-text">
+            From strategy to high-fidelity prototype.
+            I work closely with PMs and engineers to make sure
+            the design survives contact with reality.
+          </p>
+        </article>
+        <article class="service-card reveal">
+          <div class="service-num">02</div>
+          <h3 class="service-title">Design Systems</h3>
+          <p class="service-text">
+            Components that scale. Tokens that make sense.
+            Documentation people actually read. Consistency
+            is key.
+          </p>
+        </article>
+        <article class="service-card reveal">
+          <div class="service-num">03</div>
+          <h3 class="service-title">UX Research</h3>
+          <p class="service-text">
+            Interviews, usability testing, heuristic analysis.
+            Replacing opinions with evidence, and convincing
+            stakeholders to do the same.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
   <footer id="footer">
     <div class="footer-left reveal">
       <p class="section-label">// let's work together</p>
       <h2 class="footer-headline">
-        Got a <span>project?</span><br>
-        Let's talk.
+        Got a <span>project?</span> Let's talk.
       </h2>
     </div>
     <div class="footer-right reveal">
-      <div class="social-row">
+      <a href="mailto:xsgoncalves@gmail.com" class="btn-primary">xsgoncalves@gmail.com →</a>
+      <nav class="social-row" aria-label="Social links">
         <a href="https://www.linkedin.com/in/xavier-goncalves" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a>
         <a href="https://codepen.io/collection/ArprPM" target="_blank" rel="noopener noreferrer" class="social-link">Codepen</a>
         <a href="https://www.behance.net/xaviergoncalves" target="_blank" rel="noopener noreferrer" class="social-link">Behance</a>
-      </div>
-      <a href="mailto:xsgoncalves@gmail.com" class="btn-primary">xsgoncalves@gmail.com →</a>
-      <a href="https://xgoncalves.github.io/resources/XavierGoncalves-CV.pdf" target="_blank" rel="noopener noreferrer" class="social-link">Curriculum</a>
+        <a href="https://xgoncalves.github.io/resources/XavierGoncalves-CV.pdf" target="_blank" rel="noopener noreferrer" class="social-link">Curriculum</a>
+      </nav>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2026 · Made with passion and AI.</span>
-      <span class="footer-copy">Xavier Gonçalves · Product Designer</span>
+      <p class="footer-copy">© 2026 · Made with passion and AI.</p>
+      <p class="footer-copy">Xavier Gonçalves · Product Designer</p>
     </div>
   </footer>
 
   <script>
-    // Custom cursor
-    const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
-
-    const hoverTargets = document.querySelectorAll('a, button, .service-card');
-    hoverTargets.forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-    });
-
-    // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
@@ -725,16 +562,6 @@
       });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
-
-    // Parallax on hero geo rings
-    document.addEventListener('mousemove', e => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 20;
-      const y = (e.clientY / window.innerHeight - 0.5) * 20;
-      document.querySelectorAll('.geo-ring').forEach((ring, i) => {
-        const factor = (i + 1) * 0.4;
-        ring.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
-      });
-    });
   </script>
 </body>
 </html>
