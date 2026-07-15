@@ -3,564 +3,1106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Xavier Gonçalves · Product Designer</title>
+  <title>The Design Catalog · Xavier Gonçalves</title>
   <link rel="icon" type="image/png" href="./favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg: #0a0a08;
-      --ink: #f0ece0;
-      --accent: #d4f53c;
-      --muted: #7d7d72;
-      --mid: #8a8a78;
+      --paper: #f2ecda;
+      --paper-dark: #e8e0c8;
+      --ink: #1c1c18;
+      --ink-soft: #3d3d36;
+      --muted: #6b6b5e;
+      --rule: #1c1c18;
+      --earth-blue: #2a4a6b;
+      --earth-green: #3d5c3a;
+      --accent: #8b3a2a;
+      --review-bg: #ebe4d0;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
-      background: var(--bg);
+      background: var(--paper);
       color: var(--ink);
-      font-family: 'DM Mono', monospace;
-      font-weight: 300;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.9375rem;
+      line-height: 1.55;
       overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
 
-    /* NOISE OVERLAY */
+    /* Paper grain */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
       pointer-events: none;
-      z-index: 9998;
-      opacity: 0.5;
+      z-index: 9999;
     }
 
-    /* HERO */
-    #hero {
-      min-height: 100vh;
-      width: 100%;
-      max-width: 42rem;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      padding: 4rem 1.5rem;
-      gap: 3rem;
-    }
-
-    .hero-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 2;
-      width: 100%;
-    }
-
-    .tag {
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s forwards 0.3s;
-    }
-
-    .hero-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2rem, 7vw, 3.25rem);
-      font-weight: 400;
-      line-height: 1;
-      letter-spacing: 0.02em;
-      white-space: nowrap;
-      color: var(--ink);
-      opacity: 0;
-      animation: fadeUp 0.9s forwards 0.5s;
-    }
-
-    .hero-name span {
-      color: var(--accent);
-      font-weight: 400;
-    }
-
-    .hero-desc {
-      margin-top: 2.5rem;
-      font-size: 0.8rem;
-      line-height: 1.9;
-      color: var(--mid);
-      max-width: 28rem;
-      margin-left: auto;
-      margin-right: auto;
-      opacity: 0;
-      animation: fadeUp 0.9s forwards 0.8s;
-    }
-
-    .hero-cta {
-      margin-top: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.9s forwards 1s;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: var(--accent);
-      color: var(--bg);
-      padding: 0.8rem 1.8rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-weight: 400;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .btn-primary:hover {
-      background: var(--ink);
-      transform: translateY(-2px);
-    }
-
-    /* ABOUT SECTION */
-    #about {
-      width: 100%;
-      max-width: 40rem;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 8rem 1.5rem;
-      gap: 2.5rem;
-      border-top: 1px solid var(--muted);
-    }
-
-    .section-label {
-      display: block;
-      font-size: 0.6rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 2rem;
-    }
-
-    .about-left h2 {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      line-height: 1.1;
-      color: var(--ink);
-    }
-
-    .about-left h2 strong {
-      font-style: normal;
-      color: var(--accent);
-    }
-
-    .about-right {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      width: 100%;
-    }
-
-    .about-right p {
-      font-size: 0.82rem;
-      line-height: 2;
-      color: var(--mid);
-      text-align: left;
-    }
-
-    .stats-grid {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-top: 1rem;
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-
-    .stats-grid::-webkit-scrollbar {
-      display: none;
-    }
-
-    .stat-item {
-      flex: 1 1 0;
-      min-width: 0;
-      padding: 0.85rem 0.35rem 0;
-      text-align: center;
-    }
-
-    .stat-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.75rem, 4.5vw, 2.35rem);
-      font-weight: 400;
-      line-height: 1;
-      color: var(--accent);
-    }
-
-    .stat-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 0.35rem;
-      line-height: 1.35;
-    }
-
-    /* SERVICES */
-    #services {
-      width: 100%;
-      max-width: 36rem;
-      margin: 0 auto;
-      padding: 6rem 1.5rem;
-      border-top: 1px solid var(--muted);
-      text-align: center;
-    }
-
-    #services .section-label { margin-bottom: 4rem; }
-
-    .services-grid {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0;
-    }
-
-    .service-card {
-      padding: 3rem 2.5rem;
-      border: 1px solid var(--muted);
-      margin-top: -1px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s;
-      text-align: left;
-    }
-
-    .service-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--accent);
-      transform: scaleY(0);
-      transform-origin: bottom;
-      transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
-      z-index: 0;
-    }
-
-    .service-card:hover::before { transform: scaleY(1); }
-    .service-card:hover .service-num,
-    .service-card:hover .service-title,
-    .service-card:hover .service-text { color: var(--bg); }
-
-    .service-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 4rem;
-      color: var(--muted);
-      line-height: 1;
-      position: relative;
-      z-index: 1;
-      transition: color 0.3s;
-    }
-
-    .service-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.4rem;
-      color: var(--ink);
-      margin: 1.5rem 0 1rem;
-      position: relative;
-      z-index: 1;
-      transition: color 0.3s;
-    }
-
-    .service-text {
-      font-size: 0.75rem;
-      line-height: 1.8;
-      color: var(--mid);
-      position: relative;
-      z-index: 1;
-      transition: color 0.3s;
-    }
-
-    /* FOOTER */
-    #footer {
-      width: 100%;
-      max-width: 40rem;
-      margin: 0 auto;
-      padding: 6rem 1.5rem 3rem;
-      border-top: 1px solid var(--muted);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 3rem;
-    }
-
-    .footer-headline {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.25rem, 5vw, 4rem);
-      line-height: 1;
-      color: var(--ink);
-      font-weight: normal;
-    }
-
-    .footer-headline span { color: var(--accent); }
-
-    .footer-right {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .social-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-    }
-
-    .social-link {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-      position: relative;
-    }
-
-    .social-link::after {
-      content: '';
-      position: absolute;
-      left: 0; bottom: -2px;
-      width: 0; height: 1px;
-      background: var(--accent);
-      transition: width 0.3s;
-    }
-
-    .social-link:hover { color: var(--accent); }
-    .social-link:hover::after { width: 100%; }
-
-    .footer-copy {
-      font-size: 0.6rem;
-      color: var(--muted);
-      letter-spacing: 0.15em;
-    }
-
-    .footer-bottom {
-      width: 100%;
-      border-top: 1px solid var(--muted);
-      padding-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    /* FOCUS VISIBLE */
-    :focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 4px;
-    }
-
-    /* SKIP LINK */
     .skip-link {
       position: absolute;
       top: -100%;
       left: 1rem;
-      background: var(--accent);
-      color: var(--bg);
-      padding: 0.6rem 1.2rem;
-      font-size: 0.8rem;
-      font-weight: 400;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.5rem 1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
       text-decoration: none;
       z-index: 99999;
-      transition: top 0.2s;
     }
     .skip-link:focus { top: 1rem; }
 
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
     }
 
-    /* SCROLL ANIMATIONS */
+    /* ─── COVER ─── */
+    .cover {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      border-bottom: 3px solid var(--ink);
+      position: relative;
+    }
+
+    .cover-masthead {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cover-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 3rem 2rem;
+      gap: 3rem;
+      max-width: 72rem;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .earth {
+      width: min(22rem, 80vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      margin: 0 auto;
+      background:
+        radial-gradient(circle at 35% 40%, #4a7a9b 0%, transparent 45%),
+        radial-gradient(circle at 60% 55%, #3d6b4a 0%, transparent 40%),
+        radial-gradient(circle at 45% 70%, #5a8a5a 0%, transparent 35%),
+        radial-gradient(circle at 70% 30%, #2a5080 0%, transparent 30%),
+        radial-gradient(circle at 25% 65%, #4a7050 0%, transparent 25%),
+        radial-gradient(circle at 50% 50%, #1a3050 0%, #0d1828 100%);
+      box-shadow:
+        inset -1.5rem -1rem 3rem rgba(0,0,0,0.45),
+        0 0.5rem 2rem rgba(0,0,0,0.2);
+      animation: earthGlow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes earthGlow {
+      from { filter: brightness(1); }
+      to { filter: brightness(1.08); }
+    }
+
+    .cover-text {
+      text-align: left;
+    }
+
+    .cover-kicker {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      color: var(--muted);
+    }
+
+    .cover-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .cover-subtitle {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 400;
+      color: var(--ink-soft);
+      margin-bottom: 2rem;
+    }
+
+    .cover-editor {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      max-width: 28rem;
+      color: var(--ink-soft);
+      border-left: 3px solid var(--ink);
+      padding-left: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .cover-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--paper);
+      background: var(--ink);
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--ink);
+      transition: background 0.2s, color 0.2s;
+    }
+    .cover-cta:hover {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    .cover-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-top: 1px solid var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── EDITORIAL ─── */
+    .editorial {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      border-bottom: 1px solid var(--ink);
+      display: grid;
+      grid-template-columns: 8rem 1fr;
+      gap: 2rem;
+    }
+
+    .editorial-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      text-align: center;
+      color: var(--muted);
+      border-right: 1px dotted var(--ink);
+      padding-right: 1rem;
+    }
+
+    .editorial-text {
+      columns: 2;
+      column-gap: 2.5rem;
+      column-rule: 1px solid var(--paper-dark);
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+    }
+
+    .editorial-text p + p { margin-top: 1rem; }
+
+    .editorial-text em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 1.05em;
+      color: var(--ink);
+    }
+
+    /* ─── INDEX ─── */
+    .index {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 3rem;
+      border-bottom: 3px double var(--ink);
+    }
+
+    .index-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--ink);
+      display: inline-block;
+    }
+
+    .index-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+      gap: 0;
+    }
+
+    .index-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.5rem 0.75rem;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.8125rem;
+      border: 1px dotted transparent;
+      transition: background 0.15s;
+    }
+    .index-item:hover {
+      background: var(--paper-dark);
+      border-color: var(--ink);
+    }
+
+    .index-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* ─── CATALOG SECTIONS ─── */
+    .catalog {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 3rem 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 3rem 0 1.5rem;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 2rem;
+    }
+
+    .section-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 2rem;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--muted);
+    }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .section-page {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ─── ENTRIES ─── */
+    .entries {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+      gap: 0;
+    }
+
+    .entry {
+      border: 2px dotted var(--ink);
+      padding: 1.25rem 1.5rem 1.5rem;
+      margin: -1px 0 0 -1px;
+      position: relative;
+      background: var(--paper);
+      transition: background 0.2s;
+    }
+    .entry:hover { background: var(--review-bg); }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .entry-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .entry-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .entry-desc {
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin-bottom: 1rem;
+    }
+
+    .entry-review {
+      background: var(--review-bg);
+      border-left: 3px solid var(--ink);
+      padding: 0.75rem 1rem;
+      font-size: 0.78rem;
+      line-height: 1.55;
+      font-style: italic;
+      color: var(--ink-soft);
+    }
+    .entry:hover .entry-review { background: var(--paper-dark); }
+
+    .entry-review cite {
+      display: block;
+      margin-top: 0.5rem;
+      font-style: normal;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── FULL-WIDTH ENTRY ─── */
+    .entry-wide {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .entry-wide .entry-desc { margin-bottom: 0; }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 2px solid var(--ink);
+    }
+
+    .stat {
+      padding: 1rem 0.75rem;
+      text-align: center;
+      border-right: 1px dotted var(--ink);
+    }
+    .stat:last-child { border-right: none; }
+
+    .stat-value {
+      font-family: 'Fraunces', serif;
+      font-size: 1.75rem;
+      font-weight: 600;
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      display: block;
+      line-height: 1.3;
+    }
+
+    /* ─── TOOLS LIST ─── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+      gap: 0;
+      border: 2px solid var(--ink);
+    }
+
+    .tool {
+      padding: 0.75rem;
+      text-align: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-right: 1px dotted var(--ink);
+      border-bottom: 1px dotted var(--ink);
+      color: var(--ink-soft);
+    }
+
+    /* ─── MAIL ORDER (CONTACT) ─── */
+    .mail-order {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      border-top: 3px double var(--ink);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .mail-order-left h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .mail-order-left p {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 22rem;
+    }
+
+    .order-form {
+      border: 3px solid var(--ink);
+      padding: 2rem;
+      background: var(--paper-dark);
+    }
+
+    .order-form legend {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0 0.5rem;
+    }
+
+    .order-field {
+      margin-top: 1.5rem;
+    }
+
+    .order-field label {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .order-field a {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid var(--accent);
+      transition: color 0.2s;
+    }
+    .order-field a:hover { color: var(--accent); }
+
+    .order-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px dotted var(--ink);
+    }
+
+    .order-links a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+    }
+    .order-links a:hover { color: var(--accent); text-decoration: underline; }
+
+    /* ─── BACK COVER ─── */
+    .back-cover {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .back-cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 120%, rgba(42,74,107,0.4) 0%, transparent 60%);
+    }
+
+    .back-quote {
+      position: relative;
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.4;
+      max-width: 36rem;
+      margin: 0 auto 2rem;
+    }
+
+    .back-attribution {
+      position: relative;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+
+    .back-cover .earth-small {
+      position: relative;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      margin: 0 auto 2rem;
+      background:
+        radial-gradient(circle at 35% 40%, #4a7a9b 0%, transparent 45%),
+        radial-gradient(circle at 60% 55%, #3d6b4a 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, #1a3050 0%, #0d1828 100%);
+    }
+
+    .back-copy {
+      position: relative;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6b6b5e;
+    }
+
+    /* ─── RUNNING FOOTER ─── */
+    .running-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--paper-dark);
+      border-top: 1px solid var(--ink);
+      padding: 0.4rem 1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      z-index: 100;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+    }
+    .running-footer.visible { transform: translateY(0); }
+
+    /* ─── REVEAL ─── */
     .reveal {
       opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transform: translateY(1.5rem);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .cover-body {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 2rem 1.25rem;
+      }
+      .cover-text { text-align: center; }
+      .cover-editor {
+        border-left: none;
+        border-top: 3px solid var(--ink);
+        padding-left: 0;
+        padding-top: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .cover-masthead, .cover-footer { padding: 1rem 1.25rem; }
+      .masthead-availability { display: none; }
+      .editorial {
+        grid-template-columns: 1fr;
+        padding: 2rem 1.25rem;
+      }
+      .editorial-label {
+        writing-mode: horizontal-tb;
+        transform: none;
+        border-right: none;
+        border-bottom: 1px dotted var(--ink);
+        padding: 0 0 0.75rem;
+      }
+      .editorial-text { columns: 1; }
+      .index, .catalog, .mail-order { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .entry-wide { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(2) { border-right: none; }
+      .stat { border-bottom: 1px dotted var(--ink); }
+      .stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; }
+      .mail-order { grid-template-columns: 1fr; padding: 3rem 1.25rem; }
+      .section-header { grid-template-columns: 2.5rem 1fr; }
+      .section-page { display: none; }
     }
 
-    /* REDUCED MOTION */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
+        animation: none !important;
         transition-duration: 0.01ms !important;
       }
       .reveal { opacity: 1; transform: none; }
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      #hero { padding: 3rem 1.25rem; min-height: auto; }
-      #about { padding: 4rem 1.25rem; }
-      #services { padding: 4rem 1.25rem; }
-      #footer { padding: 4rem 1.25rem 2rem; }
+      .running-footer { transform: none; }
     }
   </style>
 </head>
 <body>
 
-  <a href="#main-content" class="skip-link">Skip to content</a>
+  <a href="#catalog" class="skip-link">Skip to catalog</a>
 
-  <main id="main-content">
-    <header id="hero">
-      <div class="hero-content">
-        <p class="tag">— Available for projects</p>
-        <h1 class="hero-name">Xavier <span>Gonçalves</span></h1>
-        <p class="hero-desc">
-          Product designer obsessed with the space between pixels and people.
-          Building experiences that feel inevitable, the kind where you forget
-          there was ever a designer involved.
-        </p>
-        <div class="hero-cta">
-          <a href="#about" class="btn-primary">About me →</a>
-        </div>
-      </div>
-    </header>
+  <!-- COVER -->
+  <header class="cover" id="top">
+    <div class="cover-masthead">
+      <span>Vol. I · 2026 Edition</span>
+      <span>Coimbra, Portugal</span>
+      <span class="masthead-availability">Available for projects</span>
+    </div>
 
-    <section id="about">
-      <div class="about-left reveal">
-        <p class="section-label">// about me</p>
-        <h2>
-          Less design. <br/> More <strong>solution</strong>.
-        </h2>
-      </div>
-      <div class="about-right reveal">
-        <p>
-          I'm Xavier Gonçalves, a product designer with a habit of finding
-          the real problem behind the stated one. I work at the intersection
-          of business, technology and people, turning complexity into clarity.
-        <br/>
-          From discovery to launch.
+    <div class="cover-body">
+      <div class="earth" role="img" aria-label="The whole earth, seen from space"></div>
+      <div class="cover-text">
+        <p class="cover-kicker">A catalog of access to tools</p>
+        <h1 class="cover-title">The Design<br/>Catalog</h1>
+        <p class="cover-subtitle">Xavier Gonçalves, editor</p>
+        <p class="cover-editor">
+          Product designer at the intersection of business, technology, and people.
+          This catalog reviews the tools, methods, and craft I use to turn complexity into clarity, from discovery to launch.
         </p>
-        <dl class="stats-grid">
-          <div class="stat-item">
-            <dt class="stat-num">∞</dt>
-            <dd class="stat-label">Problems solved</dd>
+        <a href="#editorial" class="cover-cta">Browse the catalog ↓</a>
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      <span>Whole systems thinking applied to pixels</span>
+      <span>pp. 1–∞</span>
+    </div>
+  </header>
+
+  <!-- EDITORIAL -->
+  <aside id="editorial" class="editorial reveal">
+    <div class="editorial-label">Editor's note</div>
+    <div class="editorial-text">
+      <p>
+        <em>We can't put it together. It is together.</em> The Whole Earth Catalog taught a generation that the right tools, clearly reviewed, could change how people live and work. This page applies the same principle to product design: not glamorous white space for its own sake, but dense, useful information you can act on.
+      </p>
+      <p>
+        I'm Xavier Gonçalves, a designer with a habit of finding the real problem behind the stated one. I work where business meets engineering meets human behaviour, and I believe the best interface is the one you forget was designed at all. The entries below are not services in the agency sense. They are <em>access points</em>: ways we might collaborate.
+      </p>
+      <p>
+        Information wants to be useful. If something here resonates, the mail-order form at the back of this catalog is always open.
+      </p>
+    </div>
+  </aside>
+
+  <!-- INDEX -->
+  <nav class="index reveal" aria-label="Catalog index">
+    <h2 class="index-title">Index</h2>
+    <div class="index-grid">
+      <a href="#understanding" class="index-item"><span>Understanding Whole Systems</span><span class="index-num">p. 4</span></a>
+      <a href="#craft" class="index-item"><span>Craft &amp; Making</span><span class="index-num">p. 12</span></a>
+      <a href="#systems" class="index-item"><span>Systems &amp; Standards</span><span class="index-num">p. 28</span></a>
+      <a href="#communications" class="index-item"><span>Communications</span><span class="index-num">p. 41</span></a>
+      <a href="#tools" class="index-item"><span>Tools &amp; Equipment</span><span class="index-num">p. 56</span></a>
+      <a href="#mail-order" class="index-item"><span>Mail Order · Contact</span><span class="index-num">p. 64</span></a>
+    </div>
+  </nav>
+
+  <main id="catalog" class="catalog">
+
+    <!-- §1 UNDERSTANDING -->
+    <section id="understanding" class="reveal">
+      <div class="section-header">
+        <span class="section-num">I</span>
+        <h2 class="section-title">Understanding Whole Systems</h2>
+        <span class="section-page">pp. 4–11</span>
+      </div>
+
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div>
+            <div class="entry-header">
+              <h3 class="entry-name">The Editor</h3>
+              <span class="entry-meta">Est. 2013</span>
+            </div>
+            <p class="entry-desc">
+              Product designer obsessed with the space between pixels and people. Less design theatre, more solution. I turn ambiguity into shipped products, working closely with PMs and engineers so design survives contact with reality. From stakeholder interviews to the last pixel before launch.
+            </p>
           </div>
-          <div class="stat-item">
-            <dt class="stat-num">+20</dt>
-            <dd class="stat-label">Projects delivered</dd>
+          <div class="stats-row">
+            <div class="stat">
+              <span class="stat-value">∞</span>
+              <span class="stat-label">Problems reframed</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">+20</span>
+              <span class="stat-label">Projects delivered</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">0px</span>
+              <span class="stat-label">Margin for mediocrity</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">∅</span>
+              <span class="stat-label">Dark patterns used</span>
+            </div>
           </div>
-          <div class="stat-item">
-            <dt class="stat-num">0px</dt>
-            <dd class="stat-label">Margin for mediocrity</dd>
+        </article>
+
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Problem Framing</h3>
+            <span class="entry-meta">Core method</span>
           </div>
-          <div class="stat-item">
-            <dt class="stat-num">∅</dt>
-            <dd class="stat-label">Dark patterns used</dd>
+          <p class="entry-desc">
+            Before any wireframe: map the system. Who benefits, who pays, what breaks at scale. The stated problem is rarely the real one.
+          </p>
+          <blockquote class="entry-review">
+            "A rare designer who asks 'should we build this?' before 'how should it look?'"
+            <cite>· The kind of PM you want</cite>
+          </blockquote>
+        </article>
+
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Design Philosophy</h3>
+            <span class="entry-meta">Operating manual</span>
           </div>
-        </dl>
+          <p class="entry-desc">
+            Inevitable, not invisible. Good design removes friction so completely you forget someone designed it. Evidence over opinion. Systems over screens.
+          </p>
+          <blockquote class="entry-review">
+            "We are as gods and might as well get good at it, especially at the things we ship to millions."
+            <cite>· Adapted from Stewart Brand</cite>
+          </blockquote>
+        </article>
       </div>
     </section>
 
-    <section id="services">
-      <h2 class="section-label">// what I do</h2>
-      <div class="services-grid">
-        <article class="service-card reveal">
-          <div class="service-num">01</div>
-          <h3 class="service-title">Product Design</h3>
-          <p class="service-text">
-            From strategy to high-fidelity prototype.
-            I work closely with PMs and engineers to make sure
-            the design survives contact with reality.
+    <!-- §2 CRAFT -->
+    <section id="craft" class="reveal">
+      <div class="section-header">
+        <span class="section-num">II</span>
+        <h2 class="section-title">Craft &amp; Making</h2>
+        <span class="section-page">pp. 12–27</span>
+      </div>
+
+      <div class="entries">
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Product Design</h3>
+            <span class="entry-meta">Full cycle</span>
+          </div>
+          <p class="entry-desc">
+            Strategy to high-fidelity prototype. User flows, interaction design, visual polish. I stay in the room through implementation, because that's where designs live or die.
           </p>
+          <blockquote class="entry-review">
+            "Survives contact with reality. Highly recommended for teams tired of pretty decks that never ship."
+            <cite>· Catalog review</cite>
+          </blockquote>
         </article>
-        <article class="service-card reveal">
-          <div class="service-num">02</div>
-          <h3 class="service-title">Design Systems</h3>
-          <p class="service-text">
-            Components that scale. Tokens that make sense.
-            Documentation people actually read. Consistency
-            is key.
+
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Interaction Design</h3>
+            <span class="entry-meta">Behaviour layer</span>
+          </div>
+          <p class="entry-desc">
+            States, transitions, edge cases. The unglamorous work of making software feel like it has common sense. Micro-interactions that reward attention without demanding it.
           </p>
+          <blockquote class="entry-review">
+            "Every loading state considered. Every empty state intentional. Refreshingly thorough."
+            <cite>· Catalog review</cite>
+          </blockquote>
         </article>
-        <article class="service-card reveal">
-          <div class="service-num">03</div>
-          <h3 class="service-title">UX Research</h3>
-          <p class="service-text">
-            Interviews, usability testing, heuristic analysis.
-            Replacing opinions with evidence, and convincing
-            stakeholders to do the same.
+
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Prototyping</h3>
+            <span class="entry-meta">Prototype · Code</span>
+          </div>
+          <p class="entry-desc">
+            Clickable prototypes for testing. Sometimes code prototypes for proving feasibility. The medium follows the question, not the other way around.
           </p>
+          <blockquote class="entry-review">
+            "Prototypes that engineers respect. A rarer commodity than you'd think."
+            <cite>· Catalog review</cite>
+          </blockquote>
+        </article>
+
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Visual Design</h3>
+            <span class="entry-meta">Surface &amp; depth</span>
+          </div>
+          <p class="entry-desc">
+            Typography, colour, spacing: the grammar of trust. Visual systems that communicate before a single word is read. Restraint as a feature.
+          </p>
+          <blockquote class="entry-review">
+            "Clean without being sterile. Distinctive without being loud."
+            <cite>· Catalog review</cite>
+          </blockquote>
         </article>
       </div>
     </section>
+
+    <!-- §3 SYSTEMS -->
+    <section id="systems" class="reveal">
+      <div class="section-header">
+        <span class="section-num">III</span>
+        <h2 class="section-title">Systems &amp; Standards</h2>
+        <span class="section-page">pp. 28–40</span>
+      </div>
+
+      <div class="entries">
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Design Systems</h3>
+            <span class="entry-meta">Scale tool</span>
+          </div>
+          <p class="entry-desc">
+            Components that scale. Tokens that make semantic sense. Documentation people actually read. A shared language between design and engineering, not a library nobody maintains.
+          </p>
+          <blockquote class="entry-review">
+            "Consistency without creativity's death. The balance is hard; this catalog entry delivers."
+            <cite>· Catalog review</cite>
+          </blockquote>
+        </article>
+
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Component Libraries</h3>
+            <span class="entry-meta">Atomic → organism</span>
+          </div>
+          <p class="entry-desc">
+            Built for real constraints: accessibility, i18n, theming, responsive behaviour. Components tested against production edge cases, not ideal-state mockups.
+          </p>
+          <blockquote class="entry-review">
+            "Finally, a system where 'button' doesn't mean four different things in four different files."
+            <cite>· Catalog review</cite>
+          </blockquote>
+        </article>
+
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Design Tokens</h3>
+            <span class="entry-meta">Single source</span>
+          </div>
+          <p class="entry-desc">
+            Semantic naming. Platform-agnostic export. Colour, spacing, typography, motion: defined once, consumed everywhere. The plumbing that makes redesigns possible.
+          </p>
+          <blockquote class="entry-review">
+            "The unsexy infrastructure that saves quarters of rework. Essential."
+            <cite>· Catalog review</cite>
+          </blockquote>
+        </article>
+      </div>
+    </section>
+
+    <!-- §4 COMMUNICATIONS -->
+    <section id="communications" class="reveal">
+      <div class="section-header">
+        <span class="section-num">IV</span>
+        <h2 class="section-title">Communications</h2>
+        <span class="section-page">pp. 41–55</span>
+      </div>
+
+      <div class="entries">
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">UX Research</h3>
+            <span class="entry-meta">Evidence kit</span>
+          </div>
+          <p class="entry-desc">
+            Interviews, usability testing, heuristic analysis. Replacing opinions with evidence, and building the case to convince stakeholders to do the same.
+          </p>
+          <blockquote class="entry-review">
+            "Turns 'I think users want…' into 'we observed users doing…' Invaluable in roadmap debates."
+            <cite>· Catalog review</cite>
+          </blockquote>
+        </article>
+
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">User Interviews</h3>
+            <span class="entry-meta">Listening tool</span>
+          </div>
+          <p class="entry-desc">
+            Structured conversations that surface mental models, workarounds, and unspoken needs. Not focus groups: deep dives with the people who actually use the thing.
+          </p>
+          <blockquote class="entry-review">
+            "Asks the questions nobody thought to ask. Finds the insight hiding in plain sight."
+            <cite>· Catalog review</cite>
+          </blockquote>
+        </article>
+
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Stakeholder Alignment</h3>
+            <span class="entry-meta">Translation layer</span>
+          </div>
+          <p class="entry-desc">
+            Workshops, journey maps, shared artifacts. Making the invisible visible so teams move in the same direction, even when they disagree on the destination.
+          </p>
+          <blockquote class="entry-review">
+            "The diplomatic skill of a translator, the rigour of an analyst. Keeps projects from derailing."
+            <cite>· Catalog review</cite>
+          </blockquote>
+        </article>
+      </div>
+    </section>
+
+    <!-- §5 TOOLS -->
+    <section id="tools" class="reveal">
+      <div class="section-header">
+        <span class="section-num">V</span>
+        <h2 class="section-title">Tools &amp; Equipment</h2>
+        <span class="section-page">pp. 56–63</span>
+      </div>
+
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="entry-header">
+            <h3 class="entry-name">Workshop Inventory</h3>
+            <span class="entry-meta">Current kit</span>
+          </div>
+          <p class="entry-desc" style="margin-bottom: 1.25rem;">
+            The tools change. The intent doesn't: pick the right instrument for the job, master it, move on when something better serves the work.
+          </p>
+          <div class="tools-grid">
+            <span class="tool">Canvas</span>
+            <span class="tool">Workshop</span>
+            <span class="tool">HTML/CSS</span>
+            <span class="tool">JavaScript</span>
+            <span class="tool">Miro</span>
+            <span class="tool">Notion</span>
+            <span class="tool">Principle</span>
+            <span class="tool">Pen &amp; Paper</span>
+            <span class="tool">Sticky Notes</span>
+            <span class="tool">Coffee</span>
+            <span class="tool">Whiteboard</span>
+            <span class="tool">Silence</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
   </main>
 
-  <footer id="footer">
-    <div class="footer-left reveal">
-      <p class="section-label">// let's work together</p>
-      <h2 class="footer-headline">
-        Got a <span>project?</span> Let's talk.
-      </h2>
+  <!-- MAIL ORDER -->
+  <section id="mail-order" class="mail-order reveal">
+    <div class="mail-order-left">
+      <h2>Mail Order</h2>
+      <p>
+        The Whole Earth Catalog ended every issue with a simple promise: stay hungry, stay foolish. This one ends with an invitation. Got a problem worth solving?<br/>Send a signal.
+      </p>
     </div>
-    <div class="footer-right reveal">
-      <a href="mailto:xsgoncalves@gmail.com" class="btn-primary">xsgoncalves@gmail.com →</a>
-      <nav class="social-row" aria-label="Social links">
-        <a href="https://www.linkedin.com/in/xavier-goncalves" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a>
-        <a href="https://codepen.io/collection/ArprPM" target="_blank" rel="noopener noreferrer" class="social-link">Codepen</a>
-        <a href="https://www.behance.net/xaviergoncalves" target="_blank" rel="noopener noreferrer" class="social-link">Behance</a>
-        <a href="https://xgoncalves.github.io/resources/XavierGoncalves-CV.pdf" target="_blank" rel="noopener noreferrer" class="social-link">Curriculum</a>
+
+    <fieldset class="order-form">
+      <legend>Order form · No. 001</legend>
+
+      <div class="order-field">
+        <label for="email">Send correspondence to</label>
+        <a id="email" href="mailto:xsgoncalves@gmail.com">xsgoncalves@gmail.com</a>
+      </div>
+
+      <nav class="order-links" aria-label="Additional resources">
+        <a href="https://www.linkedin.com/in/xavier-goncalves" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://codepen.io/collection/ArprPM" target="_blank" rel="noopener noreferrer">CodePen</a>
+        <a href="https://www.behance.net/xaviergoncalves" target="_blank" rel="noopener noreferrer">Behance</a>
+        <a href="https://xgoncalves.github.io/resources/XavierGoncalves-CV.pdf" target="_blank" rel="noopener noreferrer">Curriculum (PDF)</a>
       </nav>
-    </div>
-    <div class="footer-bottom">
-      <p class="footer-copy">© 2026 · Made with passion and AI.</p>
-      <p class="footer-copy">Xavier Gonçalves · Product Designer</p>
-    </div>
+    </fieldset>
+  </section>
+
+  <!-- BACK COVER -->
+  <footer class="back-cover">
+    <div class="earth-small" role="img" aria-hidden="true"></div>
+    <blockquote class="back-quote">
+      "Stay hungry. Stay foolish."
+    </blockquote>
+    <p class="back-attribution">· The Whole Earth Catalog, final issue, 1974</p>
+    <p class="back-copy">© 2026 · Xavier Gonçalves · The Design Catalog · Made with purpose</p>
   </footer>
+
+  <!-- RUNNING FOOTER -->
+  <div class="running-footer" id="running-footer" aria-hidden="true">
+    <span>The Design Catalog · Vol. I</span>
+    <span id="running-page">Cover</span>
+  </div>
 
   <script>
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 120);
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
     reveals.forEach(el => observer.observe(el));
+
+    const footer = document.getElementById('running-footer');
+    const pageLabel = document.getElementById('running-page');
+    const sections = [
+      { id: 'top', label: 'Cover' },
+      { id: 'understanding', label: 'p. 4 · I' },
+      { id: 'craft', label: 'p. 12 · II' },
+      { id: 'systems', label: 'p. 28 · III' },
+      { id: 'communications', label: 'p. 41 · IV' },
+      { id: 'tools', label: 'p. 56 · V' },
+      { id: 'mail-order', label: 'p. 64 · Mail Order' },
+    ];
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        footer.classList.toggle('visible', scrollY > 400);
+
+        let current = sections[0];
+        for (const s of sections) {
+          const el = document.getElementById(s.id);
+          if (el && el.getBoundingClientRect().top <= 120) current = s;
+        }
+        pageLabel.textContent = current.label;
+        ticking = false;
+      });
+    }, { passive: true });
   </script>
 </body>
 </html>
