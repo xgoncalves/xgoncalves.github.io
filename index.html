@@ -75,6 +75,8 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
       padding: 1.25rem 2rem;
       border-bottom: 1px solid var(--ink);
       font-family: 'IBM Plex Mono', monospace;
@@ -82,6 +84,13 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
+
+    .cover-masthead a {
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .cover-masthead a:hover { color: var(--accent); }
 
     .cover-body {
       display: grid;
@@ -288,7 +297,7 @@
 
     .section-header {
       display: grid;
-      grid-template-columns: 3rem 1fr auto;
+      grid-template-columns: 4.5rem 1fr auto;
       align-items: center;
       gap: 1rem;
       padding: 3rem 0 1.5rem;
@@ -302,6 +311,8 @@
       font-weight: 500;
       line-height: 1;
       color: var(--muted);
+      width: 4.5rem;
+      flex-shrink: 0;
     }
 
     .section-title {
@@ -372,7 +383,7 @@
 
     .entry-review {
       background: var(--review-bg);
-      border-left: 3px solid var(--ink);
+      border-left: 2px solid var(--ink);
       padding: 0.75rem 1rem;
       font-size: 0.78rem;
       line-height: 1.55;
@@ -644,7 +655,6 @@
         margin-right: auto;
       }
       .cover-masthead, .cover-footer { padding: 1rem 1.25rem; }
-      .masthead-availability { display: none; }
       .editorial {
         grid-template-columns: 1fr;
         padding: 2rem 1.25rem;
@@ -664,7 +674,7 @@
       .stat { border-bottom: 1px dotted var(--ink); }
       .stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; }
       .mail-order { grid-template-columns: 1fr; padding: 3rem 1.25rem; }
-      .section-header { grid-template-columns: 2.5rem 1fr; }
+      .section-header { grid-template-columns: 3.5rem 1fr; }
       .section-page { display: none; }
     }
 
@@ -685,9 +695,9 @@
   <!-- COVER -->
   <header class="cover" id="top">
     <div class="cover-masthead">
+      <span>Xavier Gonçalves</span>
       <span>Vol. I · 2026 Edition</span>
       <span>Coimbra, Portugal</span>
-      <span class="masthead-availability">Available for projects</span>
     </div>
 
     <div class="cover-body">
@@ -806,6 +816,17 @@
             "We are as gods and might as well get good at it, especially at the things we ship to millions."
             <cite>· Adapted from Stewart Brand</cite>
           </blockquote>
+        </article>
+
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Biographical Record</h3>
+            <span class="entry-meta">Vol. II · Supplement</span>
+          </div>
+          <p class="entry-desc">
+            A chronological record of projects, clients, and years of practice: public institutions, European bodies, robotics, logistics, and more. The long version.
+          </p>
+          <a href="./bio.html" class="cover-cta">Read the record →</a>
         </article>
       </div>
     </section>
@@ -1038,9 +1059,9 @@
       </div>
 
       <nav class="order-links" aria-label="Additional resources">
+        <a href="./bio.html">Biographical Record</a>
         <a href="https://www.linkedin.com/in/xavier-goncalves" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://codepen.io/collection/ArprPM" target="_blank" rel="noopener noreferrer">CodePen</a>
-        <a href="https://www.behance.net/xaviergoncalves" target="_blank" rel="noopener noreferrer">Behance</a>
         <a href="https://xgoncalves.github.io/resources/XavierGoncalves-CV.pdf" target="_blank" rel="noopener noreferrer">Curriculum (PDF)</a>
       </nav>
     </fieldset>

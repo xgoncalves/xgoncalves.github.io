@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Biographical Record · Xavier Gonçalves</title>
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --paper: #f2ecda;
+      --paper-dark: #e8e0c8;
+      --ink: #1c1c18;
+      --ink-soft: #3d3d36;
+      --muted: #6b6b5e;
+      --accent: #8b3a2a;
+      --review-bg: #ebe4d0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.5rem 1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      text-decoration: none;
+      z-index: 99999;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    a { color: inherit; }
+
+    /* ─── COVER ─── */
+    .cover {
+      min-height: 70vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .cover-masthead {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cover-masthead a {
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .cover-masthead a:hover { color: var(--accent); }
+
+    .cover-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 2rem;
+      max-width: 72rem;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .cover-kicker {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      color: var(--muted);
+    }
+
+    .cover-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .cover-subtitle {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: var(--ink-soft);
+      margin-bottom: 2rem;
+    }
+
+    .cover-editor {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      max-width: 40rem;
+      color: var(--ink-soft);
+      border-left: 3px solid var(--ink);
+      padding-left: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .cover-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--paper);
+      background: var(--ink);
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--ink);
+      transition: background 0.2s, color 0.2s;
+      align-self: flex-start;
+    }
+    .cover-cta:hover {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    .cover-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-top: 1px solid var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── CREDENTIALS ─── */
+    .credentials {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+      gap: 0;
+      border-bottom: 2px solid var(--ink);
+      border-left: none;
+      border-right: none;
+    }
+
+    .credential {
+      padding: 1.25rem 1.5rem;
+      border-right: 1px dotted var(--ink);
+    }
+    .credential:last-child { border-right: none; }
+
+    .credential-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .credential-value {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    /* ─── INDEX ─── */
+    .index {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 3rem;
+      border-bottom: 3px double var(--ink);
+    }
+
+    .index-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--ink);
+      display: inline-block;
+    }
+
+    .index-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+      gap: 0;
+    }
+
+    .index-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.5rem 0.75rem;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.8125rem;
+      border: 1px dotted transparent;
+      transition: background 0.15s;
+    }
+    .index-item:hover {
+      background: var(--paper-dark);
+      border-color: var(--ink);
+    }
+
+    .index-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* ─── CATALOG ─── */
+    .catalog {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 3rem 0 1.5rem;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 2rem;
+    }
+
+    .section-year {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--muted);
+      width: 4.5rem;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .section-page {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .entries {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+      gap: 0;
+    }
+
+    .entry {
+      border: 2px dotted var(--ink);
+      padding: 1.25rem 1.5rem 1.5rem;
+      margin: -1px 0 0 -1px;
+      background: var(--paper);
+      transition: background 0.2s;
+    }
+    .entry:hover { background: var(--review-bg); }
+
+    .entry-wide { grid-column: 1 / -1; }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .entry-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .entry-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .entry-desc {
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin-bottom: 1rem;
+    }
+
+    .entry-desc:last-child { margin-bottom: 0; }
+
+    .entry-tasks {
+      font-size: 0.78rem;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      padding-left: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .entry-tasks li { margin-bottom: 0.25rem; }
+
+    .entry-tasks-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .entry-review {
+      background: var(--review-bg);
+      border-left: 2px solid var(--ink);
+      padding: 0.75rem 1rem;
+      font-size: 0.78rem;
+      line-height: 1.55;
+      font-style: italic;
+      color: var(--ink-soft);
+    }
+    .entry:hover .entry-review { background: var(--paper-dark); }
+
+    .client-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+      gap: 0;
+      border: 2px solid var(--ink);
+      margin-top: 0.75rem;
+    }
+
+    .client {
+      padding: 0.6rem 0.85rem;
+      font-size: 0.75rem;
+      color: var(--ink-soft);
+      border-right: 1px dotted var(--ink);
+      border-bottom: 1px dotted var(--ink);
+    }
+
+    /* ─── MAIL ORDER ─── */
+    .mail-order {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      border-top: 3px double var(--ink);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .mail-order-left h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .mail-order-left p {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 22rem;
+    }
+
+    .order-form {
+      border: 3px solid var(--ink);
+      padding: 2rem;
+      background: var(--paper-dark);
+    }
+
+    .order-form legend {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0 0.5rem;
+    }
+
+    .order-field { margin-top: 1.5rem; }
+
+    .order-field label {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .order-field a {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid var(--accent);
+      transition: color 0.2s;
+    }
+    .order-field a:hover { color: var(--accent); }
+
+    .order-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px dotted var(--ink);
+    }
+
+    .order-links a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+    }
+    .order-links a:hover { color: var(--accent); text-decoration: underline; }
+
+    /* ─── BACK COVER ─── */
+    .back-cover {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .back-cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 120%, rgba(42,74,107,0.4) 0%, transparent 60%);
+    }
+
+    .back-quote {
+      position: relative;
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      font-style: italic;
+      line-height: 1.4;
+      max-width: 36rem;
+      margin: 0 auto 2rem;
+    }
+
+    .back-attribution {
+      position: relative;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .back-copy {
+      position: relative;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6b6b5e;
+    }
+
+    .running-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--paper-dark);
+      border-top: 1px solid var(--ink);
+      padding: 0.4rem 1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      z-index: 100;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+    }
+    .running-footer.visible { transform: translateY(0); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(1.5rem);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      .cover-body { padding: 2rem 1.25rem; }
+      .cover-masthead, .cover-footer { padding: 1rem 1.25rem; }
+      .credentials { grid-template-columns: 1fr; }
+      .credential { border-right: none; border-bottom: 1px dotted var(--ink); }
+      .credential:last-child { border-bottom: none; }
+      .index, .catalog, .mail-order { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .section-header { grid-template-columns: 3.5rem 1fr; }
+      .section-page { display: none; }
+      .mail-order { grid-template-columns: 1fr; }
+      .client-list { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+      .running-footer { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#record" class="skip-link">Skip to record</a>
+
+  <header class="cover" id="top">
+    <div class="cover-masthead">
+      <a href="./index.html">← The Design Catalog</a>
+      <span>Vol. II · Biographical Supplement</span>
+      <span>Coimbra, Portugal</span>
+    </div>
+
+    <div class="cover-body">
+      <p class="cover-kicker">Chronological record · Est. 2012</p>
+      <h1 class="cover-title">Biographical<br/>Record</h1>
+      <p class="cover-subtitle">Xavier Gonçalves</p>
+      <p class="cover-editor">
+        Hello, I'm Xavier. This supplement presents, in chronological order, the most notable works from each year: public institutions, European bodies, private sector clients, and internal products. A record of design practice across sectors, technologies, and borders.
+      </p>
+      <a href="#introduction" class="cover-cta">Read the record ↓</a>
+    </div>
+
+    <div class="cover-footer">
+      <span>Product designer · Linkare</span>
+      <span>pp. 1–48</span>
+    </div>
+  </header>
+
+  <div class="credentials reveal">
+    <div class="credential">
+      <p class="credential-label">Education</p>
+      <p class="credential-value">BA &amp; MA Design and Multimedia · University of Coimbra</p>
+    </div>
+    <div class="credential">
+      <p class="credential-label">Specialisation</p>
+      <p class="credential-value">Computer Science · Polytechnic Institute of Coimbra</p>
+    </div>
+    <div class="credential">
+      <p class="credential-label">Current role</p>
+      <p class="credential-value">Product Designer · Linkare</p>
+    </div>
+    <div class="credential">
+      <p class="credential-label">Location</p>
+      <p class="credential-value">Coimbra, Portugal</p>
+    </div>
+  </div>
+
+  <nav class="index reveal" aria-label="Chronological index">
+    <h2 class="index-title">Index</h2>
+    <div class="index-grid">
+      <a href="#y2012" class="index-item"><span>2012</span><span class="index-num">p. 4</span></a>
+      <a href="#y2013" class="index-item"><span>2013</span><span class="index-num">p. 6</span></a>
+      <a href="#y2014" class="index-item"><span>2014</span><span class="index-num">p. 10</span></a>
+      <a href="#y2015" class="index-item"><span>2015</span><span class="index-num">p. 12</span></a>
+      <a href="#y2016" class="index-item"><span>2016</span><span class="index-num">p. 14</span></a>
+      <a href="#y2017" class="index-item"><span>2017</span><span class="index-num">p. 18</span></a>
+      <a href="#y2018" class="index-item"><span>2018</span><span class="index-num">p. 20</span></a>
+      <a href="#y2019" class="index-item"><span>2019</span><span class="index-num">p. 24</span></a>
+      <a href="#y2020" class="index-item"><span>2020</span><span class="index-num">p. 26</span></a>
+      <a href="#y2021" class="index-item"><span>2021</span><span class="index-num">p. 28</span></a>
+      <a href="#y2022" class="index-item"><span>2022</span><span class="index-num">p. 30</span></a>
+      <a href="#y2023" class="index-item"><span>2023</span><span class="index-num">p. 34</span></a>
+      <a href="#y2024" class="index-item"><span>2024</span><span class="index-num">p. 38</span></a>
+      <a href="#y2025" class="index-item"><span>2025</span><span class="index-num">p. 40</span></a>
+      <a href="#y2026" class="index-item"><span>2026</span><span class="index-num">p. 41</span></a>
+      <a href="#other" class="index-item"><span>Other projects</span><span class="index-num">p. 43</span></a>
+      <a href="#dissertation" class="index-item"><span>Dissertation</span><span class="index-num">p. 47</span></a>
+      <a href="#correspondence" class="index-item"><span>Correspondence</span><span class="index-num">p. 49</span></a>
+    </div>
+  </nav>
+
+  <main id="record" class="catalog">
+
+    <section id="introduction" class="reveal">
+      <div class="section-header">
+        <span class="section-year">· · ·</span>
+        <h2 class="section-title">Introduction</h2>
+        <span class="section-page">pp. 2–3</span>
+      </div>
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="entry-header">
+            <h3 class="entry-name">On this record</h3>
+            <span class="entry-meta">Editor's preface</span>
+          </div>
+          <p class="entry-desc">
+            Xavier completed a Bachelor's and Master's degree in Design and Multimedia from the University of Coimbra, and holds a Specialist Title in Computer Science from the Polytechnic Institute of Coimbra. He currently resides in Coimbra and works as a product designer at Linkare. The following pages present, in chronological order, the most notable works from each year.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2012" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2012</span>
+        <h2 class="section-title">Career Start</h2>
+        <span class="section-page">p. 4</span>
+      </div>
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="entry-header">
+            <h3 class="entry-name">Coimbra University Press</h3>
+            <span class="entry-meta">Web &amp; editorial design</span>
+          </div>
+          <p class="entry-desc">First professional contract in web design and editorial, with one year of experience at the Coimbra University Press.</p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>Content management for the UC Digitalis platform</li>
+            <li>Book layout for print and digital formats</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2013" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2013</span>
+        <h2 class="section-title">Linkare</h2>
+        <span class="section-page">pp. 6–9</span>
+      </div>
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="entry-header">
+            <h3 class="entry-name">Linkare TI</h3>
+            <span class="entry-meta">Designer &amp; developer · Lisbon</span>
+          </div>
+          <p class="entry-desc">
+            Began working as a designer and developer at Linkare TI in Lisbon. Founded in 2004, Linkare has offices in Lisbon, Coimbra, and Brussels, with over 50 employees. The company specialises in IT solutions: software development, system modernisation, and technology consulting across public administration, telecommunications, and financial services.
+          </p>
+          <p class="entry-desc">
+            Over more than 12 years at Linkare, Xavier has worked across various business sectors, technologies, and clients, both nationally and internationally.
+          </p>
+          <div class="client-list">
+            <span class="client">Instituto de Informática (Segurança Social)</span>
+            <span class="client">Imprensa Nacional Casa da Moeda (INCM)</span>
+            <span class="client">European Parliament</span>
+            <span class="client">European Commission</span>
+            <span class="client">Inspeção-Geral das Atividades Culturais (IGAC)</span>
+            <span class="client">Instituto da Habitação e da Reabilitação Urbana (IHRU)</span>
+            <span class="client">Instituto dos Registos e do Notariado (IRN)</span>
+            <span class="client">Technolution (Netherlands)</span>
+            <span class="client">Whistl (United Kingdom)</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2014" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2014</span>
+        <h2 class="section-title">Assinare</h2>
+        <span class="section-page">p. 10</span>
+      </div>
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="entry-header">
+            <h3 class="entry-name">Assinare</h3>
+            <span class="entry-meta">Linkare internal product</span>
+          </div>
+          <p class="entry-desc">Internal product driving digital transformation through electronic signatures and strong authentication.</p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>Graphic identity design</li>
+            <li>Application UI/UX design</li>
+            <li>Interface development (Swing)</li>
+            <li>Functional testing</li>
+          </ul>
+          <blockquote class="entry-review">Deployed on the INCM intranet. eIDAS compliant.</blockquote>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2015" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2015</span>
+        <h2 class="section-title">Institute of Informatics</h2>
+        <span class="section-page">p. 12</span>
+      </div>
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="entry-header">
+            <h3 class="entry-name">Segurança Social Direta</h3>
+            <span class="entry-meta">External consultant · 2015–2019</span>
+          </div>
+          <p class="entry-desc">Joined Instituto de Informática in Lisbon as an external consultant through Linkare, contributing to various Segurança Social Direta projects as a product designer.</p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>Documentation (xWiki)</li>
+            <li>Wireframe and mockup design</li>
+            <li>Page creation (layouts and styles)</li>
+          </ul>
+          <span class="entry-tasks-label">Key projects</span>
+          <ul class="entry-tasks">
+            <li>Social Inclusion Benefit</li>
+            <li>Household Composition</li>
+            <li>Income Declaration</li>
+            <li>Employment Incentive Measures</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2016" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2016</span>
+        <h2 class="section-title">Public Services</h2>
+        <span class="section-page">pp. 14–17</span>
+      </div>
+      <div class="entries">
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">SigaApp</h3>
+            <span class="entry-meta">Instituto de Informática</span>
+          </div>
+          <p class="entry-desc">Mobile application allowing users to get queue tickets via smartphone for public service appointments.</p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>Interaction flow design</li>
+            <li>Functional prototyping (HTML, CSS, JS)</li>
+            <li>User testing &amp; frontend development (Ionic)</li>
+          </ul>
+          <blockquote class="entry-review">As of January 2026, still in active development, retaining its original graphic identity and interaction flows.</blockquote>
+        </article>
+
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Electronic Official Gazette</h3>
+            <span class="entry-meta">INCM</span>
+          </div>
+          <p class="entry-desc">Portal providing electronic access to the Diário da República, maintained by Imprensa Nacional Casa da Moeda.</p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>Business analysis &amp; user interviews</li>
+            <li>UI/UX design &amp; functional prototyping</li>
+            <li>User testing &amp; theme development (Liferay)</li>
+          </ul>
+          <blockquote class="entry-review">Original graphic identity and interaction flows retained through subsequent technology migrations.</blockquote>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2017" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2017</span>
+        <h2 class="section-title">Electronic Complaints Book</h2>
+        <span class="section-page">p. 18</span>
+      </div>
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="entry-header">
+            <h3 class="entry-name">Livro de Reclamações Electrónico</h3>
+            <span class="entry-meta">INCM</span>
+          </div>
+          <p class="entry-desc">Making the traditional paper complaints book available online.</p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>User interviews &amp; mockup creation</li>
+            <li>Functional prototype development &amp; user testing</li>
+            <li>Form and theme development (Liferay, JSF)</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2018" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2018</span>
+        <h2 class="section-title">Systems &amp; Registration</h2>
+        <span class="section-page">pp. 20–23</span>
+      </div>
+      <div class="entries">
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Showcase</h3>
+            <span class="entry-meta">Instituto de Informática</span>
+          </div>
+          <p class="entry-desc">Pioneered the first usability team at II and the Showcase project: a portal displaying all frontend components used by Segurança Social Direta teams, with variations, usage examples, code, and documentation.</p>
+        </article>
+
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Birth Registration</h3>
+            <span class="entry-meta">IRN</span>
+          </div>
+          <p class="entry-desc">Online birth registration for babies born in Portugal and request for their first Citizen Card. Key contributions: registration form and user area for managing requests.</p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>UX/UI design (navigation flows, styles)</li>
+            <li>Mockup creation, testing and result analysis</li>
+            <li>Form and restricted area development (JSF)</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2019" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2019</span>
+        <h2 class="section-title">Carta Social</h2>
+        <span class="section-page">p. 24</span>
+      </div>
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="entry-header">
+            <h3 class="entry-name">Carta Social</h3>
+            <span class="entry-meta">GEP · Designer, developer &amp; PM</span>
+          </div>
+          <p class="entry-desc">Platform providing information on all social services available in the country. In addition to design and frontend development, also acted as project manager.</p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>UX/UI design &amp; theme development (Liferay)</li>
+            <li>Content management (page and content creation)</li>
+            <li>Project management (milestones, team coordination)</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2020" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2020</span>
+        <h2 class="section-title">European Parliament</h2>
+        <span class="section-page">p. 26</span>
+      </div>
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="entry-header">
+            <h3 class="entry-name">Mission Organisation and Planning</h3>
+            <span class="entry-meta">European Parliament</span>
+          </div>
+          <p class="entry-desc">Two distinct phases: high-fidelity mockups for the entire platform and its documentation, followed by a functional prototype for user testing. The biggest challenge was analysing the mission creation workflow, involving multiple EP teams with distinct responsibilities.</p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>User research, wireframe and mockup creation</li>
+            <li>Functional prototype development</li>
+            <li>Theme creation for final implementation</li>
+          </ul>
+          <blockquote class="entry-review">Followed by UX/UI design support for Mission Crisis Management, specifically the COVID-19 vaccination module.</blockquote>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2021" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2021</span>
+        <h2 class="section-title">Technolution</h2>
+        <span class="section-page">p. 28</span>
+      </div>
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="entry-header">
+            <h3 class="entry-name">Energy Control Platform</h3>
+            <span class="entry-meta">Technolution · Netherlands · 2021–2023</span>
+          </div>
+          <p class="entry-desc">External consultant for a Linkare client in the Netherlands. Contributed to UX/UI design for an energy control platform used in self-service laundries.</p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>Design and creation of functional prototypes</li>
+            <li>A/B testing</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2022" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2022</span>
+        <h2 class="section-title">Whistl &amp; Recognition</h2>
+        <span class="section-page">pp. 30–33</span>
+      </div>
+      <div class="entries">
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Whistl</h3>
+            <span class="entry-meta">United Kingdom</span>
+          </div>
+          <p class="entry-desc">One of the UK's leading logistics companies. Designer and frontend developer providing continuous support. Key task: migrating a large number of legacy JSF forms to a React-based micro-frontend framework.</p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>Requirement analysis &amp; JSF to React form migration</li>
+            <li>Development of modules, components, and pages</li>
+            <li>Layouts handling large data volumes</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Linkarean of the Year</h3>
+            <span class="entry-meta">Award · 2022</span>
+          </div>
+          <p class="entry-desc">Awarded the "Linkarean of the Year" title for contributions to the company.</p>
+          <blockquote class="entry-review">Recognition for sustained impact across projects, teams, and clients.</blockquote>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2023" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2023</span>
+        <h2 class="section-title">Entrepreneurship &amp; Teaching</h2>
+        <span class="section-page">pp. 34–37</span>
+      </div>
+      <div class="entries">
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">Empreende XXI</h3>
+            <span class="entry-meta">Startup Portugal &amp; IEFP</span>
+          </div>
+          <p class="entry-desc">Platform supporting future entrepreneurs in developing and financing their businesses. Main challenge: digitising complex forms and extracting navigation flows that simplify information collection.</p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>UX/UI design (navigation flows, forms)</li>
+            <li>Form development (Vue) &amp; document export for print &amp; PDF</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-header">
+            <h3 class="entry-name">IEFP Trainer</h3>
+            <span class="entry-meta">CEARTE · 2023–2026</span>
+          </div>
+          <p class="entry-desc">Obtained Pedagogical Skills Certification (CCP) and E-Trainer certification. Became trainer at CEARTE, teaching courses such as 3D Animation and Web Design.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2024" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2024</span>
+        <h2 class="section-title">PESSOAS 2030</h2>
+        <span class="section-page">p. 38</span>
+      </div>
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="entry-header">
+            <h3 class="entry-name">PESSOAS 2030</h3>
+            <span class="entry-meta">Portugal 2030 · Demography, Skills &amp; Inclusion</span>
+          </div>
+          <p class="entry-desc">Worked on two projects: a quiz in PWA format and ongoing management of the PESSOAS 2030 WordPress portal.</p>
+          <span class="entry-tasks-label">PWA application</span>
+          <ul class="entry-tasks">
+            <li>UX/UI design (gamification)</li>
+            <li>Content management (Keystone)</li>
+          </ul>
+          <span class="entry-tasks-label">Portal</span>
+          <ul class="entry-tasks">
+            <li>Accessibility improvements and certification (Selo de Usabilidade e Acessibilidade)</li>
+            <li>Pages and components design and implementation</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2025" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2025</span>
+        <h2 class="section-title">Whistl Platform</h2>
+        <span class="section-page">p. 40</span>
+      </div>
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="entry-header">
+            <h3 class="entry-name">Whistl · New Platform</h3>
+            <span class="entry-meta">Current · UX/UI lead</span>
+          </div>
+          <p class="entry-desc">Defining user experience and interface design, validating design decisions in close collaboration with business stakeholders and development teams.</p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>UX/UI design (wireframing, research)</li>
+            <li>Theme design and implementation (HTML, CSS, React)</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="y2026" class="reveal">
+      <div class="section-header">
+        <span class="section-year">2026</span>
+        <h2 class="section-title">MOV.AI</h2>
+        <span class="section-page">p. 41</span>
+      </div>
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="entry-header">
+            <h3 class="entry-name">MOV.AI Robotics Engine Platform</h3>
+            <span class="entry-meta">Current · Product design</span>
+          </div>
+          <p class="entry-desc">
+            UX/UI design for MOV.AI, a robotics engine platform for autonomous mobile robots. The work spans low-code development tools, deployment interfaces, and fleet management: helping operators configure missions, define operational scenes, and manage heterogeneous robot fleets without drowning in complexity.
+          </p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>UX/UI design for task, scene, and behaviour editors</li>
+            <li>Interface design for fleet management and deployment tools</li>
+            <li>Human-machine interface patterns for heterogeneous robots</li>
+            <li>Design validation with stakeholders and engineering teams</li>
+          </ul>
+          <blockquote class="entry-review">Making industrial robotics accessible through interfaces that respect the complexity of the domain without passing it on to the user.</blockquote>
+        </article>
+      </div>
+    </section>
+
+    <section id="other" class="reveal">
+      <div class="section-header">
+        <span class="section-year">· · ·</span>
+        <h2 class="section-title">Other Relevant Projects</h2>
+        <span class="section-page">pp. 42–45</span>
+      </div>
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="client-list">
+            <span class="client">Comissão para a Igualdade no Trabalho e no Emprego · Liferay portal</span>
+            <span class="client">Fundo REVITA · Liferay portal</span>
+            <span class="client">Programa Operacional Inclusão Social e Emprego · Liferay portal</span>
+            <span class="client">Plataforma de Serviços de Interoperabilidade · Static website</span>
+            <span class="client">Portugal Voluntário · Portal design &amp; development</span>
+            <span class="client">Centro de Relações Laborais · Liferay portal</span>
+            <span class="client">BTravel (Unitel) · OpenText application design</span>
+            <span class="client">Latitude 32 (SIS) · Angular app design &amp; development</span>
+            <span class="client">Inspeção Geral das Atividades Culturais · Liferay portal</span>
+            <span class="client">Segurança Social + próxima · Mobile app design &amp; development</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="dissertation" class="reveal">
+      <div class="section-header">
+        <span class="section-year">MA</span>
+        <h2 class="section-title">Master's Dissertation</h2>
+        <span class="section-page">pp. 46–47</span>
+      </div>
+      <div class="entries">
+        <article class="entry entry-wide">
+          <div class="entry-header">
+            <h3 class="entry-name">Guia da Universidade de Coimbra</h3>
+            <span class="entry-meta">Android app · Grade 18/20</span>
+          </div>
+          <p class="entry-desc">Master's thesis focused on the design and development of an Android mobile application serving as a guide to the University of Coimbra.</p>
+          <span class="entry-tasks-label">Tasks</span>
+          <ul class="entry-tasks">
+            <li>Branding &amp; graphic identity</li>
+            <li>UX/UI design</li>
+            <li>Proof-of-concept development (Android 4.0)</li>
+            <li>User testing</li>
+          </ul>
+          <blockquote class="entry-review">Presented at the TRANSCREATIVA conference, KEDGE Business School, Bordeaux, 2014.</blockquote>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <section id="correspondence" class="mail-order reveal">
+    <div class="mail-order-left">
+      <h2>Correspondence</h2>
+      <p>
+        End of record. For the full printable edition, consult the PDF appendix. Questions, collaborations, or corrections welcome.<br/>Send a signal.
+      </p>
+    </div>
+
+    <fieldset class="order-form">
+      <legend>Contact · Supplement No. 002</legend>
+
+      <div class="order-field">
+        <label for="email">Send correspondence to</label>
+        <a id="email" href="mailto:xsgoncalves@gmail.com">xsgoncalves@gmail.com</a>
+      </div>
+
+      <nav class="order-links" aria-label="Related resources">
+        <a href="./index.html">The Design Catalog</a>
+        <a href="./resources/XavierGoncalves-CV.pdf" target="_blank" rel="noopener noreferrer">Curriculum (PDF)</a>
+        <a href="https://www.linkedin.com/in/xavier-goncalves" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://www.behance.net/xaviergoncalves" target="_blank" rel="noopener noreferrer">Behance</a>
+      </nav>
+    </fieldset>
+  </section>
+
+  <footer class="back-cover">
+    <blockquote class="back-quote">
+      "We are as gods and might as well get good at it."
+    </blockquote>
+    <p class="back-attribution">· Stewart Brand · Whole Earth Catalog, 1968</p>
+    <p class="back-copy">© 2026 · Xavier Gonçalves · Biographical Record · Vol. II</p>
+  </footer>
+
+  <div class="running-footer" id="running-footer" aria-hidden="true">
+    <span>Biographical Record · Vol. II</span>
+    <span id="running-page">Cover</span>
+  </div>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => observer.observe(el));
+
+    const footer = document.getElementById('running-footer');
+    const pageLabel = document.getElementById('running-page');
+    const sections = [
+      { id: 'top', label: 'Cover' },
+      { id: 'introduction', label: 'Introduction' },
+      { id: 'y2012', label: '2012' },
+      { id: 'y2013', label: '2013' },
+      { id: 'y2014', label: '2014' },
+      { id: 'y2015', label: '2015' },
+      { id: 'y2016', label: '2016' },
+      { id: 'y2017', label: '2017' },
+      { id: 'y2018', label: '2018' },
+      { id: 'y2019', label: '2019' },
+      { id: 'y2020', label: '2020' },
+      { id: 'y2021', label: '2021' },
+      { id: 'y2022', label: '2022' },
+      { id: 'y2023', label: '2023' },
+      { id: 'y2024', label: '2024' },
+      { id: 'y2025', label: '2025' },
+      { id: 'y2026', label: '2026' },
+      { id: 'other', label: 'Other projects' },
+      { id: 'dissertation', label: 'Dissertation' },
+      { id: 'correspondence', label: 'Correspondence' },
+    ];
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        footer.classList.toggle('visible', window.scrollY > 400);
+        let current = sections[0];
+        for (const s of sections) {
+          const el = document.getElementById(s.id);
+          if (el && el.getBoundingClientRect().top <= 120) current = s;
+        }
+        pageLabel.textContent = current.label;
+        ticking = false;
+      });
+    }, { passive: true });
+  </script>
+</body>
+</html>
